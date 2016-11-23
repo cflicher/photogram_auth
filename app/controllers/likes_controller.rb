@@ -1,4 +1,11 @@
 class LikesController < ApplicationController
+
+  def my_likes
+    @photos = current_user.liked_photos
+
+    render("likes/my_likes.html.erb")
+  end
+
   def index
     @likes = Like.all
 

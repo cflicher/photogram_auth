@@ -20,8 +20,10 @@
         <td><%= like.photo_id %></td>
         <td>
           <a href="/likes/<%= like.id %>" class="btn btn-primary">Show</a>
+          <% if like.user_id == current_user.id %>
           <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>

@@ -3,6 +3,26 @@ Rails.application.routes.draw do
   devise_for :users
   root "photos#index"
 
+  get "/my_likes", :controller => "likes", :action => "my_likes"
+  # get "/users/:id", :controller => "users", :action => "show"
+
+  # Routes for the User resource:
+  # CREATE
+  # get "/comments/new", :controller => "comments", :action => "new"
+  # post "/create_comment", :controller => "comments", :action => "create"
+
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # # UPDATE
+  # get "/comments/:id/edit", :controller => "comments", :action => "edit"
+  # post "/update_comment/:id", :controller => "comments", :action => "update"
+  #
+  # # DELETE
+  # get "/delete_comment/:id", :controller => "comments", :action => "destroy"
+
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"

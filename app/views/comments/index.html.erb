@@ -22,8 +22,10 @@
         <td><%= comment.user_id %></td>
         <td>
           <a href="/comments/<%= comment.id %>" class="btn btn-primary">Show</a>
+          <% if comment.user_id == current_user.id %>
           <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>
