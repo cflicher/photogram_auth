@@ -42,10 +42,10 @@
             <input type="hidden" name="user_id" value="<%=photo.user.id%>">
 
             <button class="btn btn-link">
-              <% if  photo.likes.count == 0%>
-              <i class="fa fa-heart-o"></i>
-              <% else %>
+              <% if  photo.fans.pluck(:user_id).include? current_user.id%>
               <i class="fa fa-heart"></i>
+              <% else %>
+              <i class="fa fa-heart-o"></i>
               <% end %>
             </button>
 
@@ -61,19 +61,20 @@
 
       </div>
       <ul class="media-list">
+
 <%=photo.comments.each do |comment|%>
         <li class="media">
           <div class="media-body">
             <h6 class="media-heading">
               <a href="/users/<%=comment.user_id%>"><%=comment.user.username%></a>
               <small>
-                <%= comment.updated_at %>
+            <%= time_ago_in_words(comment.updated_at) %> ago
               </small>
             </h6>
             <%=comment.body%>
           </div>
         </li>
-
+    <% end %>
 
         <li class="media">
           <div class="media-body">
@@ -81,9 +82,9 @@
               <!-- Hidden input for authenticity token to protect from forgery -->
               <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>">
 
-              <input type="hidden" name="photo_id" value="<%=comment.photo.id%>">
+              <input type="hidden" name="photo_id" value="<%=photo.id%>">
 
-              <input type="hidden" name="user_id" value="<%=comment.user.id  %>">
+              <input type="hidden" name="user_id" value="<%=photo.user.id%>">
 
               <!-- Label and input for body -->
               <div class="form-group">
@@ -91,12 +92,12 @@
                   Body
                 </label>
 
-                <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                <input type="text" id="body" name="body" placeholder='Add a comment...' class="form-control" required>
               </div>
             </form>
           </div>
         </li>
-          <% end %>
+
       </ul>
     </div>
 
